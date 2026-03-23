@@ -1,0 +1,7 @@
+venv/
+data/*.pkl
+data/*.npy
+model/*.pt
+__pycache__/
+cpp/build/
+*.zip
