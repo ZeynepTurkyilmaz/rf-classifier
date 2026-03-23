@@ -1,0 +1,9 @@
+numpy
+scipy
+matplotlib
+torch
+torchvision
+fastapi
+uvicorn
+h5py
+pybind11
