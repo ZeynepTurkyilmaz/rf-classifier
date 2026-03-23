@@ -278,27 +278,4 @@ docker build -t rf-classifier .
 docker run -p 8000:8000 rf-classifier
 ```
 
----
 
-## Key Implementation Decisions
-
-**C++ for FFT, not Python.** SciPy's `stft` would have been simpler to write. The C++ FFTW3 module was a deliberate choice to reflect how signal processing is implemented in production EW systems — close to the metal, with predictable latency.
-
-**Spectrograms instead of raw IQ.** Feeding raw IQ time-series directly into an RNN or 1-D CNN is an equally valid approach. Spectrograms were chosen because they make the classification problem analogous to image recognition, which CNNs are exceptionally well-suited for, and because they are interpretable — an engineer can look at a spectrogram and sanity-check the output.
-
-**SNR filtering during training.** Including very low SNR samples (−20 dB to −6 dB) during training actually hurts accuracy on realistic signals. The model learns to classify noise rather than modulation structure. Filtering to SNR ≥ 0 dB improves real-world performance significantly.
-
----
-
-## References
-
-- T. O'Shea, J. West — *Radio Machine Learning Dataset Generation with GNU Radio* (2016)
-- RadioML dataset: https://www.deepsig.ai/datasets
-- FFTW3: http://www.fftw.org
-- pybind11: https://pybind11.readthedocs.io
-
----
-
-## License
-
-MIT — see [LICENSE](LICENSE) for details.
